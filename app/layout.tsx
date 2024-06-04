@@ -1,11 +1,6 @@
 import type { Metadata } from "next";
-import { Roboto } from "next/font/google";
+import { GeistSans } from "geist/font/sans";
 import "./globals.css";
-
-const roboto = Roboto({
-  weight: ["100", "300", "400", "500", "700", "900"],
-  subsets: ["latin"],
-});
 
 export const metadata: Metadata = {
   title: "Waitlist",
@@ -19,7 +14,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={roboto.className}>{children}</body>
+      <body className={GeistSans.className}>{children}</body>
     </html>
   );
 }
