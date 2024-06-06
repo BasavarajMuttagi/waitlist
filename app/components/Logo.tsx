@@ -15,7 +15,7 @@ const Logo = () => {
       className="text-xl flex items-center justify-between"
     >
       <img
-        src={logo}
+        src={logo.src}
         alt="logo"
         className="h-8"
         onClick={() => setIsCollapsed((prev) => !prev)}

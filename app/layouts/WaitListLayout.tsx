@@ -1,7 +1,8 @@
 import { Funnel } from "@phosphor-icons/react/dist/ssr";
-import SummaryBox from "../components/pure/SummaryBox";
-import IconButton from "../components/pure/IconButton";
-import WaitListTable from "../components/pure/WaitListTable";
+import IconButton from "../components/IconButton";
+import SummaryBox from "../components/SummaryBox";
+import WaitListTable from "../components/WaitListTable";
+
 
 const WaitListLayout = () => {
   return (
