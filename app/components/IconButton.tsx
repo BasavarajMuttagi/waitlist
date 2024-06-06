@@ -7,7 +7,7 @@ const IconButton = (props: ButtonHTMLAttributes<HTMLButtonElement>) => {
     <button
       {...rest}
       className={twMerge(
-        "flex items-center p-2 rounded-md bg-slate-200 text-slate-700 border space-x-2 h-fit w-fit",
+        "flex items-center p-2 rounded-md bg-slate-100 text-slate-700  space-x-2 h-fit w-fit",
         className
       )}
     >
