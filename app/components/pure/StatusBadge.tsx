@@ -1,10 +1,13 @@
-import React from "react";
 import { twMerge } from "tailwind-merge";
 
-const StatusBadge = ({ type }: { type: "active" | "inactive" | "lead" }) => {
-  if (type == "active") return <Badge type={type} text="Active" />;
-  if (type == "inactive") return <Badge type={type} text="Inactive" />;
-  if (type == "lead") return <Badge type={type} text="Lead" />;
+const StatusBadge = ({
+  type,
+}: {
+  type: "Active" | "Inactive" | "Lead" | string;
+}) => {
+  if (type == "Active") return <Badge type={type} text="Active" />;
+  if (type == "Inactive") return <Badge type={type} text="Inactive" />;
+  if (type == "Lead") return <Badge type={type} text="Lead" />;
 };
 
 export default StatusBadge;
@@ -14,25 +17,25 @@ const Badge = ({
   type,
 }: {
   text: string;
-  type: "active" | "inactive" | "lead";
+  type: "Active" | "Inactive" | "Lead";
 }) => {
   return (
     <div
       className={twMerge(
         "flex items-center space-x-2 rounded-full px-2 py-1 w-fit",
-        type == "active"
-          ? "bg-green-50"
-          : type == "inactive"
-          ? "bg-slate-50"
-          : "bg-blue-50"
+        type == "Active"
+          ? "bg-green-100"
+          : type == "Inactive"
+          ? "bg-slate-100"
+          : "bg-blue-100"
       )}
     >
       <div
         className={twMerge(
           "h-[6px] w-[6px] rounded-full",
-          type == "active"
+          type == "Active"
             ? "bg-green-700"
-            : type == "inactive"
+            : type == "Inactive"
             ? "bg-slate-700"
             : "bg-blue-500"
         )}
@@ -40,9 +43,9 @@ const Badge = ({
       <div
         className={twMerge(
           "text-xs font-medium",
-          type == "active"
+          type == "Active"
             ? "text-green-700"
-            : type == "inactive"
+            : type == "Inactive"
             ? "text-slate-700"
             : "text-blue-500"
         )}
