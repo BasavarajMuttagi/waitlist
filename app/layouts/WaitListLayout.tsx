@@ -19,12 +19,12 @@ const WaitListLayout = () => {
           <SummaryBox text="Newly Added" count={50} />
           <SummaryBox text="Leads" count={20} />
         </div>
-        <div className="flex items-center justify-between">
-          <IconButton>
+        <div className="flex flex-col space-y-4 sm:flex-row sm:items-center sm:justify-between">
+          <IconButton className="shadow">
             <Funnel size={16} />
             <span className="text-xs font-medium">Add Filter</span>
           </IconButton>
-          <div className="flex items-center space-x-8 mr-2">
+          <div className="flex justify-between items-center sm:flex sm:items-center sm:space-x-8 sm:mr-2">
             <SearchBar />
             <ArrowsClockwise size={16} className="text-slate-700" />
             <SquareSplitHorizontal size={16} className="text-slate-700" />
