@@ -1,3 +1,4 @@
+"use client"
 import {
   CalendarDots,
   CheckSquare,
@@ -7,9 +8,10 @@ import {
 import { useContext } from "react";
 import { motion } from "framer-motion";
 import { twMerge } from "tailwind-merge";
-import { CollapseContext } from "@/app/page";
+import { useCollapse } from "../contexts/CollapseContextProvider";
+
 const SideBarItems = () => {
-  const [isCollapsed, _] = useContext(CollapseContext);
+  const [isCollapsed] = useCollapse();
 
   return (
     <div className="w-full">

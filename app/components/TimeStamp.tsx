@@ -1,10 +1,10 @@
+"use client"
 import { CaretDown, Globe } from "@phosphor-icons/react";
 import { motion } from "framer-motion";
-import { useContext } from "react";
-import { CollapseContext } from "../page";
+import { useCollapse } from "../contexts/CollapseContextProvider";
 
 const TimeStamp = () => {
-  const [isCollapsed, _] = useContext(CollapseContext);
+  const [isCollapsed] = useCollapse();
 
   return (
     <motion.div

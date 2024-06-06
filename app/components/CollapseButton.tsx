@@ -1,9 +1,9 @@
-import { useContext } from "react";
+"use client";
 import collapse from "@/public/assets/collapse.svg";
-import { CollapseContext } from "../page";
+import { useCollapse } from "../contexts/CollapseContextProvider";
 
 const CollapseButton = () => {
-  const [_, setIsCollapsed] = useContext(CollapseContext);
+  const [_, setIsCollapsed] = useCollapse();
 
   return (
     <div>

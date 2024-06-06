@@ -1,16 +1,16 @@
-import { useContext } from "react";
-import Logo from "../components/Logo";
+"use client";
+import Logo from "../components/BrandName";
 import TimeStamp from "../components/TimeStamp";
-import { CollapseContext } from "../page";
 import { motion } from "framer-motion";
 import DashBoardLink from "../components/DashBoardLink";
 import Help from "../components/Help";
 import LocationCard from "../components/Location";
 import ProfileCard from "../components/ProfileCard";
 import SideBarItems from "../components/SideBarItems";
+import { useCollapse } from "../contexts/CollapseContextProvider";
 
 const SideBarLayout = () => {
-  const [isCollapsed] = useContext(CollapseContext);
+  const [isCollapsed] = useCollapse();
 
   return (
     <motion.aside
@@ -27,7 +27,7 @@ const SideBarLayout = () => {
         </div>
         <SideBarItems />
       </div>
-      <div className="space-y-2">
+      <div className="space-y-2 relative">
         <DashBoardLink />
         <ProfileCard />
         <Help />

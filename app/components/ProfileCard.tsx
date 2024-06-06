@@ -1,15 +1,17 @@
 "use client";
-import { CollapseContext } from "@/app/page";
 import { CaretDown, CaretUp } from "@phosphor-icons/react/dist/ssr";
 import { motion } from "framer-motion";
-import { useContext, useState } from "react";
+import { useState } from "react";
+import AdminMenu from "./AdminMenu";
+import { useCollapse } from "../contexts/CollapseContextProvider";
 
 const ProfileCard = () => {
-  const [isCollapsed, _] = useContext(CollapseContext);
-
+  const [isCollapsed] = useCollapse();
   const [showMenu, setShowMenu] = useState(false);
   return (
     <>
+      {showMenu && !isCollapsed && <AdminMenu />}
+
       <motion.div
         animate={{
           justifyContent: isCollapsed ? "center" : "",
@@ -37,9 +39,9 @@ const ProfileCard = () => {
             <div className="text-slate-500 text-[10px]">admin@gmail.com</div>
           </div>
           {showMenu ? (
-            <CaretUp size={20} className="text-slate-700" />
+            <CaretUp size={10} className="text-slate-700" />
           ) : (
-            <CaretDown size={20} className="text-slate-700" />
+            <CaretDown size={10} className="text-slate-700" />
           )}
         </motion.div>
       </motion.div>

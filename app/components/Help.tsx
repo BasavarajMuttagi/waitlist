@@ -1,11 +1,11 @@
-import { CollapseContext } from "@/app/page";
+"use client"
 import { Question } from "@phosphor-icons/react";
 import { motion } from "framer-motion";
-import { useContext } from "react";
 import { twMerge } from "tailwind-merge";
+import { useCollapse } from "../contexts/CollapseContextProvider";
 
 const Help = () => {
-  const [isCollapsed] = useContext(CollapseContext);
+  const [isCollapsed] = useCollapse();
 
   return (
     <motion.div

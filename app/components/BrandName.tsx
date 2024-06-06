@@ -1,11 +1,11 @@
-import { useContext } from "react";
-import logo from "@/public/assets/logo.svg";
+"use client"
 import CollapseButton from "./CollapseButton";
 import { motion } from "framer-motion";
-import { CollapseContext } from "../page";
+import { useCollapse } from "../contexts/CollapseContextProvider";
+import BrandLogo from "./BrandLogo";
 
-const Logo = () => {
-  const [isCollapsed, setIsCollapsed] = useContext(CollapseContext);
+const BrandName = () => {
+  const [isCollapsed] = useCollapse();
 
   return (
     <motion.div
@@ -14,12 +14,7 @@ const Logo = () => {
       }}
       className="text-xl flex items-center justify-between"
     >
-      <img
-        src={logo.src}
-        alt="logo"
-        className="h-8"
-        onClick={() => setIsCollapsed((prev) => !prev)}
-      />
+      <BrandLogo />
       <motion.div
         animate={{
           opacity: isCollapsed ? 0 : 1,
@@ -29,7 +24,7 @@ const Logo = () => {
         transition={{ duration: 0.3, ease: "easeInOut" }}
         className="flex justify-between items-center w-full px-2"
       >
-        <div className="flex items-center font-bold tracking-wide space-x-1">
+        <div className="flex items-center font-bold tracking-wide space-x-1 text-lg">
           <div>Front</div>
           <div className="rounded-full h-[3px] w-[3px] bg-black"></div>
           <div>Desk</div>
@@ -40,4 +35,4 @@ const Logo = () => {
   );
 };
 
-export default Logo;
+export default BrandName;

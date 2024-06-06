@@ -1,10 +1,10 @@
-import { CollapseContext } from "@/app/page";
+"use client"
 import { ArrowsLeftRight } from "@phosphor-icons/react/dist/ssr";
 import { motion } from "framer-motion";
-import { useContext } from "react";
+import { useCollapse } from "../contexts/CollapseContextProvider";
 
 const LocationCard = () => {
-  const [isCollapsed] = useContext(CollapseContext);
+  const [isCollapsed] = useCollapse();
 
   return (
     <motion.div

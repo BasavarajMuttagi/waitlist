@@ -1,10 +1,10 @@
-import { CollapseContext } from "@/app/page";
+"use client"
 import { ArrowSquareOut, SquaresFour } from "@phosphor-icons/react/dist/ssr";
 import { motion } from "framer-motion";
-import { useContext } from "react";
+import { useCollapse } from "../contexts/CollapseContextProvider";
 
 const DashBoardLink = () => {
-  const [isCollapsed, _] = useContext(CollapseContext);
+  const [isCollapsed] = useCollapse();
 
   return (
     <motion.div
