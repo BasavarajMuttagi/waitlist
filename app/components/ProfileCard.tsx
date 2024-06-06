@@ -1,22 +1,25 @@
 "use client";
 import { CaretDown, CaretUp } from "@phosphor-icons/react/dist/ssr";
 import { motion } from "framer-motion";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import AdminMenu from "./AdminMenu";
 import { useCollapse } from "../contexts/CollapseContextProvider";
 
 const ProfileCard = () => {
   const [isCollapsed] = useCollapse();
   const [showMenu, setShowMenu] = useState(false);
+  useEffect(() => {
+    setShowMenu(false);
+  }, [isCollapsed]);
   return (
     <>
-      {showMenu && !isCollapsed && <AdminMenu />}
+      {showMenu && <AdminMenu />}
 
       <motion.div
         animate={{
           justifyContent: isCollapsed ? "center" : "",
         }}
-        onClick={() => setShowMenu((prev) => !prev)}
+        onClick={() => !isCollapsed && setShowMenu((prev) => !prev)}
         className="cursor-pointer w-full rounded-md flex items-center p-2 shadow bg-white border border-slate-100"
       >
         <img
