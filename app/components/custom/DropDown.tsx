@@ -23,7 +23,7 @@ const Dropdown = ({
       onClick={() => setShow((prev) => !prev)}
     >
       <div className="rounded-md  flex justify-between items-center px-3 py-1.5">
-        <span className="text-sm font-normal">{selected}</span>
+        <span className="sm:text-sm font-medium">{selected}</span>
         <CaretDown size={12} className="text-zinc-500" />
       </div>
       {show && (

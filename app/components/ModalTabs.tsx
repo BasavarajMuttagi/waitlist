@@ -7,7 +7,7 @@ const ModalTabs = () => {
   const [activeTab, setActiveTab] = useActiveTab();
 
   return (
-    <div className="bg-slate-50 p-2 flex-1 rounded-tl-md border-r border-slate-200 w-full max-w-[230px]">
+    <div className="bg-slate-50 w-full h-fit p-2  border-b sm:border-b-0  sm:rounded-tl-md sm:border-r border-slate-200  sm:max-w-[230px] sm:flex-1 sm:h-full">
       <ul>
         <li className="cursor-pointer">
           <div

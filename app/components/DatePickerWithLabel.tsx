@@ -21,7 +21,9 @@ const DatePickerWithLabel = ({
           {value ? format(value, "dd MMMM yyyy") : "Pick a date"}
         </div>
       </div>
-      <div className="absolute z-30 top-[50%] left-[45%]">{showPicker && children}</div>
+      <div className="absolute z-30 top-[50%] left-[45%]">
+        {showPicker && children}
+      </div>
     </div>
   );
 };

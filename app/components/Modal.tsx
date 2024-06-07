@@ -24,9 +24,9 @@ const Modal = ({ setShowModal }: { setShowModal: (data: boolean) => void }) => {
   return (
     <form
       onSubmit={handleSubmit(submitHandler)}
-      className="max-w-[600px] h-[400px] absolute inset-x-[265px] inset-y-52 w-full  z-20 rounded-md drop-shadow-lg border"
+      className="w-full absolute inset-x-5  inset-y-[20%] z-20 rounded-md drop-shadow-lg border max-w-[320px] h-[450px] sm:max-w-[600px] sm:h-[400px] sm:inset-x-[265px] sm:inset-y-52"
     >
-      <div className="flex h-full">
+      <div className="flex flex-col sm:flex-row sm:h-full">
         <ActiveTabContextProvider>
           <ModalTabs />
           <FilterForm control={control} watch={watch} register={register} />

@@ -58,7 +58,7 @@ const FilterForm = ({
   };
 
   return (
-    <div className="bg-white p-2 flex-1 rounded-tr-md">
+    <div className="bg-white p-2  sm:rounded-tr-md  sm:flex-1">
       {activeTab === "SCHEDULE" && (
         <div className="text-slate-700 flex-1 p-1 space-y-12">
           <div className="space-y-1">
@@ -77,7 +77,7 @@ const FilterForm = ({
               }}
             />
           </div>
-          <div className="flex items-center justify-between space-x-2">
+          <div className="space-y-4  sm:flex sm:items-center sm:justify-between sm:space-x-2 sm:space-y-0">
             <div className="space-y-1 flex-1">
               <DatePickerWithLabel
                 label="From"
@@ -130,10 +130,9 @@ const FilterForm = ({
           )}
           <div>
             <ul
-              className="space-y-2 overflow-y-auto"
+              className="space-y-2 overflow-y-auto max-h-[calc(450px-256px)] h-full sm:max-h-[calc(400px-80px)]"
               style={{
                 scrollbarWidth: "thin",
-                maxHeight: "calc(400px - 80px)",
               }}
             >
               {filteredPeopleList.map(({ name, tag }, index) => (
@@ -199,10 +198,9 @@ const FilterForm = ({
               )}
               <div>
                 <ul
-                  className="space-y-2 overflow-y-auto"
+                  className="space-y-2 overflow-y-auto max-h-[calc(450px-284px)] sm:max-h-[calc(400px-110px)]"
                   style={{
                     scrollbarWidth: "thin",
-                    maxHeight: "calc(400px - 110px)",
                   }}
                 >
                   {filteredServiceList.map(({ name, status, type }, index) => (
