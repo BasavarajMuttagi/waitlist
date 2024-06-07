@@ -4,15 +4,15 @@ import {
   Controller,
   UseFormRegister,
   UseFormWatch,
-  UseWatchProps,
 } from "react-hook-form";
-import Dropdown from "./custom/DropDown";
+
 import { useActiveTab } from "../contexts/ActiveTabContextProvider";
 import SearchBar from "./custom/SearchBar";
 import { twMerge } from "tailwind-merge";
 import DatePickerWithLabel from "./DatePickerWithLabel";
 import DatePicker from "./custom/DatePicker";
 import { filterType } from "../zod/schemas";
+import Dropdown from "./custom/DropDown";
 
 const PeopleData = [
   { name: "John Doe", tag: "Payer" },
@@ -113,7 +113,7 @@ const FilterForm = ({
               name="schedule.preset"
               control={control}
               defaultValue="This month"
-              render={({ field: { value, onBlur, onChange, ref } }) => {
+              render={({ field: { value, onChange } }) => {
                 return (
                   <Dropdown
                     options={[
@@ -127,8 +127,6 @@ const FilterForm = ({
                     ]}
                     value={value}
                     onChange={onChange}
-                    ref={ref}
-                    onBlur={onBlur}
                   />
                 );
               }}
@@ -143,16 +141,12 @@ const FilterForm = ({
                 <Controller
                   name="schedule.from"
                   control={control}
-                  render={({
-                    field: { name, value, onBlur, onChange, ref },
-                  }) => {
+                  render={({ field: { name, value, onChange } }) => {
                     return (
                       <DatePicker
                         name={name}
                         value={value}
                         onChange={onChange}
-                        onBlur={onBlur}
-                        ref={ref}
                       />
                     );
                   }}
@@ -167,16 +161,12 @@ const FilterForm = ({
                 <Controller
                   name="schedule.to"
                   control={control}
-                  render={({
-                    field: { name, value, onBlur, onChange, ref },
-                  }) => {
+                  render={({ field: { name, value, onChange } }) => {
                     return (
                       <DatePicker
                         name={name}
                         value={value}
                         onChange={onChange}
-                        onBlur={onBlur}
-                        ref={ref}
                       />
                     );
                   }}
@@ -323,7 +313,7 @@ const FilterForm = ({
                   name="product.serviceTypeTag"
                   control={control}
                   defaultValue="Show all service type"
-                  render={({ field: { value, onBlur, onChange, ref } }) => {
+                  render={({ field: { value, onChange } }) => {
                     return (
                       <Dropdown
                         options={[
@@ -337,8 +327,6 @@ const FilterForm = ({
                         ]}
                         value={value}
                         onChange={onChange}
-                        ref={ref}
-                        onBlur={onBlur}
                       />
                     );
                   }}
@@ -351,7 +339,7 @@ const FilterForm = ({
                   name="product.serviceStatusTag"
                   control={control}
                   defaultValue="Show all"
-                  render={({ field: { value, onBlur, onChange, ref } }) => {
+                  render={({ field: { value, onChange } }) => {
                     return (
                       <Dropdown
                         options={[
@@ -363,8 +351,6 @@ const FilterForm = ({
                         ]}
                         value={value}
                         onChange={onChange}
-                        ref={ref}
-                        onBlur={onBlur}
                       />
                     );
                   }}

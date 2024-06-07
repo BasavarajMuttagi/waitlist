@@ -16,21 +16,16 @@ import {
   startOfWeek,
 } from "date-fns";
 import { useState } from "react";
-import { RefCallBack } from "react-hook-form";
 import { twMerge } from "tailwind-merge";
 
 const DateGrid = ({
   name,
   onChange,
-  value,
-  ref,
-  onBlur,
+  value
 }: {
   name: string;
   onChange: (data: Date) => void;
   value: Date;
-  ref?: RefCallBack;
-  onBlur?: () => void;
 }) => {
   let colStartClasses = [
     "",
@@ -64,8 +59,6 @@ const DateGrid = ({
   return (
     <div
       id={name}
-      ref={ref}
-      onBlur={onBlur}
       className="w-72  rounded-md border-2 border-slate-200 p-2 bg-white shrink-0"
     >
       <div className="flex justify-between items-center">

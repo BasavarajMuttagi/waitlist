@@ -1,20 +1,16 @@
 "use client";
 import { CaretDown, Check } from "@phosphor-icons/react/dist/ssr";
 import { useState } from "react";
-import { RefCallBack } from "react-hook-form";
+
 
 const Dropdown = ({
   options,
   onChange,
   value,
-  ref,
-  onBlur,
 }: {
   options: string[];
   onChange: (data: string) => void;
   value: string;
-  ref?: RefCallBack;
-  onBlur?: () => void;
 }) => {
   const [selected, setSelected] = useState(value);
   const [show, setShow] = useState(false);
@@ -28,8 +24,6 @@ const Dropdown = ({
       onClick={() => setShow((prev) => !prev)}
     >
       <div
-        ref={ref}
-        onBlur={onBlur}
         className="rounded-md  flex justify-between items-center px-3 py-1.5"
       >
         <span className="text-sm font-normal">{selected}</span>

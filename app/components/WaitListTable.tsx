@@ -411,18 +411,21 @@ const WaitListTable = () => {
         </thead>
         <tbody className="text-slate-700 font-medium text-xs">
           {tableData.map(
-            ({
-              createdOn,
-              email,
-              payer,
-              payerPhone,
-              scheduled,
-              services,
-              status,
-            }) => {
+            (
+              {
+                createdOn,
+                email,
+                payer,
+                payerPhone,
+                scheduled,
+                services,
+                status,
+              },
+              key
+            ) => {
               return (
                 <tr
-                  key={email}
+                  key={email + key}
                   className="border-b border-slate-200 text-nowrap"
                 >
                   <td className="p-2">
