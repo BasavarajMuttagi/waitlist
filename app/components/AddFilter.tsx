@@ -13,7 +13,8 @@ const AddFilter = () => {
   const [showModal, setShowModal] = useState(false);
   return (
     <>
-      {showModal && createPortal(<Modal />, document.body)}
+      {showModal &&
+        createPortal(<Modal setShowModal={setShowModal} />, document.body)}
       <IconButton
         className="shadow"
         onClick={() => setShowModal((prev) => !prev)}

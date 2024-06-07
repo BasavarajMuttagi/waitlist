@@ -7,7 +7,7 @@ import FormActionButtons from "./FormActionButtons";
 import { filterSchema, filterType } from "../zod/schemas";
 import useWaitlistStore from "../store";
 
-const Modal = () => {
+const Modal = ({ setShowModal }: { setShowModal: (data: boolean) => void }) => {
   const { setFilter, filters } = useWaitlistStore();
   const { control, handleSubmit, reset, register, watch } = useForm<filterType>(
     {
@@ -18,6 +18,7 @@ const Modal = () => {
 
   const submitHandler = (data: filterType) => {
     setFilter(data);
+    setShowModal(false);
   };
 
   return (
