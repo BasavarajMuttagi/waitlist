@@ -1,4 +1,4 @@
-import { z } from "zod";
+import { boolean, z } from "zod";
 
 const filterSchema = z.object({
   schedule: z.object({
@@ -17,5 +17,16 @@ const filterSchema = z.object({
 
 type filterType = z.infer<typeof filterSchema>;
 
-export { filterSchema };
-export type { filterType };
+const columnFilterSchema = z.object({
+  CreatedOn: z.boolean().optional(),
+  Payer: z.boolean().optional(),
+  Status: z.boolean().optional(),
+  Email: z.boolean().optional(),
+  Phone: z.boolean().optional(),
+  Service: z.boolean().optional(),
+  Scheduled: z.boolean().optional(),
+});
+type columnFilterType = z.infer<typeof columnFilterSchema>;
+
+export { filterSchema, columnFilterSchema };
+export type { filterType, columnFilterType };

@@ -8,8 +8,10 @@ import WaitListTable from "../components/WaitListTable";
 import SearchBar from "../components/SearchBar";
 import AddFilter from "../components/AddFilter";
 import PayerNameChips from "../components/PayerNameChips";
+import HideColumns from "../components/HideColumns";
 
 const WaitListLayout = () => {
+
   return (
     <div className="p-4 py-2 w-full rounded-md space-y-10 bg-white drop-shadow-md">
       <h1 className="text-2xl font-semibold text-slate-700">Waitlist</h1>
@@ -26,7 +28,7 @@ const WaitListLayout = () => {
           <div className="flex justify-between items-center sm:flex sm:items-center sm:space-x-8 sm:mr-2">
             <SearchBar />
             <ArrowsClockwise size={16} className="text-slate-700" />
-            <SquareSplitHorizontal size={16} className="text-slate-700" />
+            <HideColumns/>
             <DownloadSimple size={16} className="text-slate-700" />
           </div>
         </div>
