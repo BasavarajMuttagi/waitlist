@@ -72,5 +72,13 @@ const ServiceType = [
 ];
 
 const Status = ["Show all", "Public", "Private", "Disable", "Draft"];
-
-export { PeopleData, ServicesData, ScheduleData, ServiceType, Status };
+const ProfileUrl =
+  "https://s3-alpha-sig.figma.com/img/50bf/8335/ed36576c36a0ca9f2f12b142cec2231f?Expires=1718582400&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=WLJrDcPNwLeXl1fqOW9QH6WBak0JztYdJQoreyNZTv~WNzqoB6NIKmQbmJ549bbX2J3YgQSvbpvUVc26AtIQwAR7gBW-8423vbWmxX27y80kAneVljohzH7Ackx~BpBnYUtBzMrvh9QsKwyZWItZYKbaffFNXWTFteRzD0moBEMxeRq4XL-2SURMTm7n1doYAztaYGwhXRzt4SIQUR4rqd5oCCbY~Vgh4-KPuYZjDlH-WzEbBbj090XD-v6rT-lSAaq7dFzQCuCEj-5JU1N65e2GyuBdIE~c8AjEIuA-v7grY8H4TlJUL8pdL-6LOoGkVup1nddx41OLPaQs0qKEVg__";
+export {
+  PeopleData,
+  ServicesData,
+  ScheduleData,
+  ServiceType,
+  Status,
+  ProfileUrl,
+};

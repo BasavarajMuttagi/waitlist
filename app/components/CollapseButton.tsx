@@ -11,7 +11,9 @@ const CollapseButton = () => {
       <Image
         src={collapse.src}
         alt="logo"
-        className="h-5 cursor-pointer"
+        className="cursor-pointer"
+        height={20}
+        width={20}
         onClick={() => setIsCollapsed((prev) => !prev)}
       />
     </div>
