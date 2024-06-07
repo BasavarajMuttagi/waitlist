@@ -2,18 +2,16 @@ import { z } from "zod";
 
 const filterSchema = z.object({
   schedule: z.object({
-    preset: z.string(),
-    from: z.date(),
-    to: z.date(),
+    preset: z.string().optional(),
+    from: z.date().optional(),
+    to: z.date().optional(),
   }),
-
-  people: z.string().array(),
-
+  people: z.string().array().optional(),
   product: z.object({
-    searchType: z.string(),
-    serviceName: z.string().array(),
-    serviceTypeTag: z.string(),
-    serviceStatusTag: z.string(),
+    searchType: z.string().optional(),
+    serviceName: z.string().array().optional(),
+    serviceTypeTag: z.string().optional(),
+    serviceStatusTag: z.string().optional(),
   }),
 });
 

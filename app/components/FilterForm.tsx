@@ -66,7 +66,6 @@ const FilterForm = ({
             <Controller
               name="schedule.preset"
               control={control}
-              defaultValue="This month"
               render={({ field: { value, onChange } }) => {
                 return (
                   <Dropdown
@@ -258,7 +257,6 @@ const FilterForm = ({
                 <Controller
                   name="product.serviceTypeTag"
                   control={control}
-                  defaultValue="Show all service type"
                   render={({ field: { value, onChange } }) => {
                     return (
                       <Dropdown
@@ -276,7 +274,6 @@ const FilterForm = ({
                 <Controller
                   name="product.serviceStatusTag"
                   control={control}
-                  defaultValue="Show all"
                   render={({ field: { value, onChange } }) => {
                     return (
                       <Dropdown

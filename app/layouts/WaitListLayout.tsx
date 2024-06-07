@@ -7,6 +7,7 @@ import SummaryBox from "../components/SummaryBox";
 import WaitListTable from "../components/WaitListTable";
 import SearchBar from "../components/SearchBar";
 import AddFilter from "../components/AddFilter";
+import PayerNameChips from "../components/PayerNameChips";
 
 const WaitListLayout = () => {
   return (
@@ -19,7 +20,9 @@ const WaitListLayout = () => {
           <SummaryBox text="Leads" count={20} />
         </div>
         <div className="flex flex-col space-y-4 sm:flex-row sm:items-center sm:justify-between">
-          <AddFilter />
+          <div className="flex items-center space-x-3">
+            <AddFilter /> <PayerNameChips />
+          </div>
           <div className="flex justify-between items-center sm:flex sm:items-center sm:space-x-8 sm:mr-2">
             <SearchBar />
             <ArrowsClockwise size={16} className="text-slate-700" />

@@ -21,11 +21,11 @@ import { twMerge } from "tailwind-merge";
 const DateGrid = ({
   name,
   onChange,
-  value
+  value,
 }: {
   name: string;
   onChange: (data: Date) => void;
-  value: Date;
+  value: Date | undefined;
 }) => {
   let colStartClasses = [
     "",
@@ -104,20 +104,20 @@ const DateGrid = ({
                 setSelectedDay(day), onChange(day);
               }}
               className={clsx(
-                isEqual(day, selectedDay) && "text-white",
-                !isEqual(day, selectedDay) && isToday(day) && "text-red-500",
-                !isEqual(day, selectedDay) &&
+                isEqual(day, selectedDay!) && "text-white",
+                !isEqual(day, selectedDay!) && isToday(day) && "text-red-500",
+                !isEqual(day, selectedDay!) &&
                   !isToday(day) &&
                   isSameMonth(day, firstDayCurrentMonth) &&
                   "text-gray-900",
-                !isEqual(day, selectedDay) &&
+                !isEqual(day, selectedDay!) &&
                   !isToday(day) &&
                   !isSameMonth(day, firstDayCurrentMonth) &&
                   "text-gray-400",
-                isEqual(day, selectedDay) && isToday(day) && "bg-red-500",
-                isEqual(day, selectedDay) && !isToday(day) && "bg-gray-900",
-                !isEqual(day, selectedDay) && "hover:bg-gray-200",
-                (isEqual(day, selectedDay) || isToday(day)) && "font-semibold",
+                isEqual(day, selectedDay!) && isToday(day) && "bg-red-500",
+                isEqual(day, selectedDay!) && !isToday(day) && "bg-gray-900",
+                !isEqual(day, selectedDay!) && "hover:bg-gray-200",
+                (isEqual(day, selectedDay!) || isToday(day)) && "font-semibold",
                 "mx-auto flex h-8 w-8 items-center justify-center rounded-md"
               )}
             >

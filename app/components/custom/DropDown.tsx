@@ -2,7 +2,6 @@
 import { CaretDown, Check } from "@phosphor-icons/react/dist/ssr";
 import { useState } from "react";
 
-
 const Dropdown = ({
   options,
   onChange,
@@ -10,7 +9,7 @@ const Dropdown = ({
 }: {
   options: string[];
   onChange: (data: string) => void;
-  value: string;
+  value: string | undefined;
 }) => {
   const [selected, setSelected] = useState(value);
   const [show, setShow] = useState(false);
@@ -23,9 +22,7 @@ const Dropdown = ({
       className="max-w-screen-md w-full relative rounded-md border-2 border-zinc-200 shadow-sm"
       onClick={() => setShow((prev) => !prev)}
     >
-      <div
-        className="rounded-md  flex justify-between items-center px-3 py-1.5"
-      >
+      <div className="rounded-md  flex justify-between items-center px-3 py-1.5">
         <span className="text-sm font-normal">{selected}</span>
         <CaretDown size={12} className="text-zinc-500" />
       </div>
@@ -49,7 +46,7 @@ const Options = ({
 }: {
   options: string[];
   updateState: (data: string) => void;
-  selected: string;
+  selected: string | undefined;
 }) => {
   return (
     <ul

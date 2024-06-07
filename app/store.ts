@@ -3,8 +3,10 @@ import { createJSONStorage, persist, PersistOptions } from "zustand/middleware";
 import { filterType } from "./zod/schemas";
 
 type waitListStoreType = {
-  filter: filterType;
-  setFilter: (newFilter: filterType) => {};
+  filters: filterType;
+  setFilter: (newFilter: filterType) => void;
+  resetStore: () => void;
+  removeNameChip: (name: string) => void;
 };
 const storageModule: PersistOptions<waitListStoreType> = {
   name: "waitlist-storage",
@@ -12,12 +14,33 @@ const storageModule: PersistOptions<waitListStoreType> = {
   skipHydration: true,
 };
 
+const initialState: filterType = {
+  schedule: { preset: "All" },
+  people: [],
+  product: { searchType: "NAME" },
+};
+
 const creator = (set: any, get: any) => ({
-  filter: {} as filterType,
+  filters: initialState as filterType,
   setFilter: (newFilter: filterType) =>
     set(() => ({
-      filter: newFilter,
+      filters: newFilter,
     })),
+  removeNameChip: (name: string) => {
+    console.log(get().filters);
+    const people = get().filters.people.filter(
+      (eachPerson: string) => eachPerson != name
+    );
+    console.log(people);
+    console.log({
+      ...get().filters,
+      people,
+    });
+    set(() => ({
+      filters: { ...get().filters, people },
+    }));
+  },
+  resetStore: () => set(() => ({ filters: initialState })),
 });
 
 const useWaitlistStore = create<waitListStoreType>()(

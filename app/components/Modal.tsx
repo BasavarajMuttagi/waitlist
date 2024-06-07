@@ -5,17 +5,19 @@ import FilterForm from "./FilterForm";
 import ModalTabs from "./ModalTabs";
 import FormActionButtons from "./FormActionButtons";
 import { filterSchema, filterType } from "../zod/schemas";
+import useWaitlistStore from "../store";
 
 const Modal = () => {
+  const { setFilter, filters } = useWaitlistStore();
   const { control, handleSubmit, reset, register, watch } = useForm<filterType>(
     {
       resolver: zodResolver(filterSchema),
-      defaultValues: { product: { searchType: "NAME" } },
+      defaultValues: filters,
     }
   );
 
   const submitHandler = (data: filterType) => {
-    console.log(data);
+    setFilter(data);
   };
 
   return (
