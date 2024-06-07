@@ -1,13 +1,12 @@
 import {
   ArrowsClockwise,
   DownloadSimple,
-  Funnel,
   SquareSplitHorizontal,
 } from "@phosphor-icons/react/dist/ssr";
-import IconButton from "../components/IconButton";
 import SummaryBox from "../components/SummaryBox";
 import WaitListTable from "../components/WaitListTable";
 import SearchBar from "../components/SearchBar";
+import AddFilter from "../components/AddFilter";
 
 const WaitListLayout = () => {
   return (
@@ -20,10 +19,7 @@ const WaitListLayout = () => {
           <SummaryBox text="Leads" count={20} />
         </div>
         <div className="flex flex-col space-y-4 sm:flex-row sm:items-center sm:justify-between">
-          <IconButton className="shadow">
-            <Funnel size={16} />
-            <span className="text-xs font-medium">Add Filter</span>
-          </IconButton>
+          <AddFilter />
           <div className="flex justify-between items-center sm:flex sm:items-center sm:space-x-8 sm:mr-2">
             <SearchBar />
             <ArrowsClockwise size={16} className="text-slate-700" />
