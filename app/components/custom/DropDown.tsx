@@ -58,7 +58,10 @@ const Options = ({
   selected: string;
 }) => {
   return (
-    <ul className="text-sm font-normal max-w-screen-md w-full absolute top-12 z-10 border rounded-md h-[232px] overflow-y-auto  bg-white drop-shadow">
+    <ul
+      style={{ scrollbarWidth: "thin" }}
+      className="text-sm font-normal max-w-screen-md w-full absolute top-12 z-10 border rounded-md h-[232px] overflow-y-auto  bg-white drop-shadow"
+    >
       {options.map((eachOption) => (
         <li
           key={eachOption}

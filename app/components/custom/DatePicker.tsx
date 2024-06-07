@@ -66,17 +66,25 @@ const DateGrid = ({
       id={name}
       ref={ref}
       onBlur={onBlur}
-      className="max-w-sm w-full rounded-md border-2 border-slate-200 p-2 bg-white shrink-0"
+      className="w-72  rounded-md border-2 border-slate-200 p-2 bg-white shrink-0"
     >
       <div className="flex justify-between items-center">
         <div className="p-3 border rounded-lg w-fit">
-          <CaretLeft size={20} onClick={previousMonth} />
+          <CaretLeft
+            size={20}
+            onClick={previousMonth}
+            className="cursor-pointer"
+          />
         </div>
         <div>
           <p className="font-semibold">{format(currentMonth, "MMMM yyyy")}</p>
         </div>
         <div className="p-3 border rounded-lg w-fit">
-          <CaretRight size={20} onClick={nextMonth} />
+          <CaretRight
+            size={20}
+            onClick={nextMonth}
+            className="cursor-pointer"
+          />
         </div>
       </div>
       <div className="text-gray-500 grid grid-cols-7 mt-10 text-center">

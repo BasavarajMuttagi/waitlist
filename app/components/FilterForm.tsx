@@ -1,13 +1,18 @@
-import { zodResolver } from "@hookform/resolvers/zod";
 import { useState } from "react";
-import { Controller, useForm } from "react-hook-form";
-import { z } from "zod";
+import {
+  Control,
+  Controller,
+  UseFormRegister,
+  UseFormWatch,
+  UseWatchProps,
+} from "react-hook-form";
 import Dropdown from "./custom/DropDown";
 import { useActiveTab } from "../contexts/ActiveTabContextProvider";
-import { CalendarBlank } from "@phosphor-icons/react/dist/ssr";
-import { format } from "date-fns";
 import SearchBar from "./custom/SearchBar";
 import { twMerge } from "tailwind-merge";
+import DatePickerWithLabel from "./DatePickerWithLabel";
+import DatePicker from "./custom/DatePicker";
+import { filterType } from "../zod/schemas";
 
 const PeopleData = [
   { name: "John Doe", tag: "Payer" },
@@ -62,7 +67,15 @@ const ServicesData = [
   { name: "Productivity App Subscription", type: "General", status: "Public" },
 ];
 
-const FilterForm = () => {
+const FilterForm = ({
+  register,
+  control,
+  watch,
+}: {
+  register: UseFormRegister<filterType>;
+  control: Control<filterType>;
+  watch: UseFormWatch<filterType>;
+}) => {
   const [activeTab] = useActiveTab();
   const [personName, setPersonName] = useState("");
   const [filteredPeopleList, setFilteredPeopleList] =
@@ -71,35 +84,6 @@ const FilterForm = () => {
   const [filteredServiceList, setFilteredServiceList] = useState<
     { name: string; type: string; status: string }[]
   >([]);
-
-  const scheduleSchema = z.object({
-    schedule: z.object({
-      preset: z.string(),
-      from: z.date(),
-      to: z.date(),
-    }),
-
-    people: z.string().array(),
-
-    product: z.object({
-      searchType: z.string(),
-      serviceName: z.string().array(),
-      serviceTypeTag: z.string(),
-      serviceStatusTag: z.string(),
-    }),
-  });
-
-  type scheduleType = z.infer<typeof scheduleSchema>;
-
-  const { control, handleSubmit, reset, register, getValues, watch } =
-    useForm<scheduleType>({
-      resolver: zodResolver(scheduleSchema),
-      defaultValues: { product: { searchType: "NAME" } },
-    });
-
-  const submitHandler = (data: scheduleType) => {
-    console.log(data);
-  };
 
   const filterPeople = (term: string = "") => {
     setPersonName(term);
@@ -150,54 +134,54 @@ const FilterForm = () => {
               }}
             />
           </div>
-          <div className="flex items-center justify-between space-x-2 relative">
+          <div className="flex items-center justify-between space-x-2">
             <div className="space-y-1 flex-1">
-              <label className="text-xs font-medium">From</label>
-              <div className="rounded-md border-2 border-zinc-200 flex items-center px-3 py-1.5 space-x-3 cursor-pointer shadow-sm">
-                <CalendarBlank size={20} />
-                <div className="text-sm font-medium">
-                  {"" ? format("", "dd MMMM yyyy") : "Pick a date"}
-                </div>
-              </div>
-              {/* <Controller
-                name="schedule.from"
-                control={control}
-                render={({ field: { name, value, onBlur, onChange, ref } }) => {
-                  return (
-                    <DatePicker
-                      name={name}
-                      value={value}
-                      onChange={onChange}
-                      onBlur={onBlur}
-                      ref={ref}
-                    />
-                  );
-                }}
-              /> */}
+              <DatePickerWithLabel
+                label="From"
+                value={watch("schedule.from") as Date}
+              >
+                <Controller
+                  name="schedule.from"
+                  control={control}
+                  render={({
+                    field: { name, value, onBlur, onChange, ref },
+                  }) => {
+                    return (
+                      <DatePicker
+                        name={name}
+                        value={value}
+                        onChange={onChange}
+                        onBlur={onBlur}
+                        ref={ref}
+                      />
+                    );
+                  }}
+                />
+              </DatePickerWithLabel>
             </div>
             <div className="space-y-1 flex-1">
-              <label className="text-xs font-medium">To</label>
-              <div className="rounded-md border-2 border-zinc-200 flex items-center px-3 py-1.5 space-x-3 cursor-pointer shadow-sm">
-                <CalendarBlank size={20} />
-                <div className="text-sm font-medium">
-                  {"" ? format("", "dd MMMM yyyy") : "Pick a date"}
-                </div>
-              </div>
-              {/* <Controller
-                name="schedule.to"
-                control={control}
-                render={({ field: { name, value, onBlur, onChange, ref } }) => {
-                  return (
-                    <DatePicker
-                      name={name}
-                      value={value}
-                      onChange={onChange}
-                      onBlur={onBlur}
-                      ref={ref}
-                    />
-                  );
-                }}
-              /> */}
+              <DatePickerWithLabel
+                label="To"
+                value={watch("schedule.to") as Date}
+              >
+                <Controller
+                  name="schedule.to"
+                  control={control}
+                  render={({
+                    field: { name, value, onBlur, onChange, ref },
+                  }) => {
+                    return (
+                      <DatePicker
+                        name={name}
+                        value={value}
+                        onChange={onChange}
+                        onBlur={onBlur}
+                        ref={ref}
+                      />
+                    );
+                  }}
+                />
+              </DatePickerWithLabel>
             </div>
           </div>
         </div>
