@@ -8,16 +8,63 @@ import {
   User,
 } from "@phosphor-icons/react/dist/ssr";
 import StatusBadge from "./StatusBadge";
-import { tableData } from "../Data/AppData";
 import { motion } from "framer-motion";
-import useWaitlistStore from "../store";
+import useWaitlistStore, { Person } from "../store";
+import { useEffect, useState } from "react";
 
 const WaitListTable = () => {
-  const { columnFilters } = useWaitlistStore();
+  const { columnFilters, peopleData, filters, servicesData } =
+    useWaitlistStore();
+  const [filteredPeopleList, setFilteredPeopleList] = useState(peopleData);
   const getInitialColumnState = (isColumnVisible: boolean) => ({
     opacity: isColumnVisible ? 1 : 0,
     width: isColumnVisible ? 1 : 0,
   });
+
+  const filterTableData = () => {
+    const { schedule, people, product } = filters;
+    let result: Person[] = peopleData;
+
+    if (people?.length! > 0) {
+      result = result.filter((eachPerson) => {
+        if (people?.includes(eachPerson.payer)) {
+          return eachPerson;
+        }
+      });
+    }
+
+    
+    if (
+      product.searchType == "NAME" &&
+      product.serviceName &&
+      product.serviceName.length > 0
+    ) {
+      result = result.filter((eachPerson) => {
+        if (product.serviceName?.includes(eachPerson.services)) {
+          return eachPerson;
+        }
+      });
+    }
+
+    if (
+      product.searchType == "TAGS" &&
+      product.serviceStatusTag !== "Show all" &&
+      product.serviceTypeTag !== "Show all service type"
+    ) {
+      result = result.filter(
+        (eachPerson) =>
+          eachPerson.serviceType == product.serviceTypeTag &&
+          eachPerson.serviceStatus == product.serviceStatusTag
+      );
+    }
+
+    setFilteredPeopleList(result);
+  };
+
+  useEffect(() => {
+    filterTableData();
+  }, [filters]);
+
   return (
     <div
       className="border border-slate-200 rounded-md  h-[60vh] overflow-x-auto"
@@ -111,10 +158,12 @@ const WaitListTable = () => {
             </motion.th>
           </tr>
         </thead>
+
         <tbody className="text-slate-700 font-medium text-xs">
-          {tableData.map(
+          {filteredPeopleList.map(
             (
               {
+                id,
                 createdOn,
                 email,
                 payer,
@@ -126,10 +175,7 @@ const WaitListTable = () => {
               key
             ) => {
               return (
-                <tr
-                  key={email + key}
-                  className="border-b border-slate-200 text-nowrap"
-                >
+                <tr key={id} className="border-b border-slate-200 text-nowrap">
                   <motion.td initial={true} className="p-2">
                     <input
                       type="checkbox"

@@ -7,10 +7,11 @@ import { createPortal } from "react-dom";
 import useWaitlistStore from "../store";
 
 const AddFilter = () => {
+  const [showModal, setShowModal] = useState(false);
   useEffect(() => {
     useWaitlistStore.persist.rehydrate();
   }, []);
-  const [showModal, setShowModal] = useState(false);
+
   return (
     <>
       {showModal &&

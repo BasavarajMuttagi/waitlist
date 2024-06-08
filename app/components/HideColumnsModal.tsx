@@ -22,7 +22,6 @@ const HideColumnsModal = ({
   });
 
   const submitHandler = (data: columnFilterType) => {
-    console.log(data);
     setColumnFilter(data);
     setShowModal(false);
   };

@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import {
   Control,
   Controller,
@@ -13,13 +13,8 @@ import DatePickerWithLabel from "./DatePickerWithLabel";
 import DatePicker from "./custom/DatePicker";
 import { filterType } from "../zod/schemas";
 import Dropdown from "./custom/Dropdown";
-import {
-  PeopleData,
-  ScheduleData,
-  ServicesData,
-  ServiceType,
-  Status,
-} from "../Data/AppData";
+import { PeopleData, ScheduleData, ServiceType, Status } from "../Data/AppData";
+import useWaitlistStore from "../store";
 
 const FilterForm = ({
   register,
@@ -30,10 +25,10 @@ const FilterForm = ({
   control: Control<filterType>;
   watch: UseFormWatch<filterType>;
 }) => {
+  const { peopleData, servicesData } = useWaitlistStore();
   const [activeTab] = useActiveTab();
   const [personName, setPersonName] = useState("");
-  const [filteredPeopleList, setFilteredPeopleList] =
-    useState<{ name: string; tag: string }[]>(PeopleData);
+  const [filteredPeopleList, setFilteredPeopleList] = useState(peopleData);
   const [serviceName, setServiceName] = useState("");
   const [filteredServiceList, setFilteredServiceList] = useState<
     { name: string; type: string; status: string }[]
@@ -43,7 +38,7 @@ const FilterForm = ({
     setPersonName(term);
     setFilteredPeopleList([
       ...PeopleData.filter((person) =>
-        person.name.toLowerCase().includes(term.toLowerCase())
+        person.payer.toLowerCase().includes(term.toLowerCase())
       ),
     ]);
   };
@@ -51,7 +46,7 @@ const FilterForm = ({
   const filterService = (term: string = "") => {
     setServiceName(term);
     setFilteredServiceList([
-      ...ServicesData.filter((service) =>
+      ...servicesData.filter((service) =>
         service.name.toLowerCase().includes(term.toLowerCase())
       ),
     ]);
@@ -135,24 +130,24 @@ const FilterForm = ({
                 scrollbarWidth: "thin",
               }}
             >
-              {filteredPeopleList.map(({ name, tag }, index) => (
-                <li key={name + index}>
+              {filteredPeopleList.map(({ payer, id, status }, index) => (
+                <li key={id}>
                   <label
                     className="space-x-3 flex items-center cursor-pointer"
-                    htmlFor={name + index}
+                    htmlFor={id}
                   >
                     <input
                       {...register("people")}
                       type="checkbox"
-                      value={name}
-                      id={name + index}
+                      value={payer}
+                      id={id}
                       className="checked:appearance-none w-4 h-4 bg-black rounded-sm"
                     />
                     <div className="font-normal text-gray-700 text-sm">
-                      {name}
+                      {payer}
                     </div>
                     <div className="bg-slate-100 rounded-[4px] text-[10px] py-[2px] px-[8px] font-medium">
-                      {tag}
+                      {"Payer"}
                     </div>
                   </label>
                 </li>

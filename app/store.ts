@@ -1,10 +1,33 @@
 import { create } from "zustand";
 import { createJSONStorage, persist, PersistOptions } from "zustand/middleware";
 import { columnFilterType, filterType } from "./zod/schemas";
+import { PeopleData, ServicesData } from "./Data/AppData";
+
+type Service = {
+  id: string;
+  name: string;
+  type: string;
+  status: string;
+};
+
+export type Person = {
+  id: string;
+  createdOn: string;
+  payer: string;
+  status: string;
+  email: string;
+  payerPhone: string;
+  services: string;
+  scheduled: string;
+  serviceType: string;
+  serviceStatus: string;
+};
 
 type waitListStoreType = {
   filters: filterType;
   columnFilters: columnFilterType;
+  peopleData: Person[];
+  servicesData: Service[];
   setFilter: (newFilter: filterType) => void;
   resetStore: () => void;
   removeNameChip: (name: string) => void;
@@ -20,7 +43,12 @@ const storageModule: PersistOptions<waitListStoreType> = {
 const initialState: filterType = {
   schedule: { preset: "All" },
   people: [],
-  product: { searchType: "NAME" },
+  product: {
+    searchType: "NAME",
+    serviceName: [],
+    serviceStatusTag: "",
+    serviceTypeTag: "",
+  },
 };
 
 const columnFiltersInitialState: columnFilterType = {
@@ -36,6 +64,8 @@ const columnFiltersInitialState: columnFilterType = {
 const creator = (set: any, get: any) => ({
   filters: initialState,
   columnFilters: columnFiltersInitialState,
+  peopleData: PeopleData,
+  servicesData: ServicesData,
   setFilter: (newFilter: filterType) =>
     set(() => ({
       filters: newFilter,

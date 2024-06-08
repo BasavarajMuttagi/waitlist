@@ -9,17 +9,24 @@ import useWaitlistStore from "../store";
 
 const Modal = ({ setShowModal }: { setShowModal: (data: boolean) => void }) => {
   const { setFilter, filters } = useWaitlistStore();
-  const { control, handleSubmit, reset, register, watch } = useForm<filterType>(
-    {
-      resolver: zodResolver(filterSchema),
-      defaultValues: filters,
-    }
-  );
+  const {
+    control,
+    handleSubmit,
+    reset,
+    register,
+    watch,
+    formState: { errors },
+  } = useForm<filterType>({
+    resolver: zodResolver(filterSchema),
+    defaultValues: filters,
+  });
 
   const submitHandler = (data: filterType) => {
     setFilter(data);
     setShowModal(false);
   };
+
+  console.log(errors);
 
   return (
     <form
@@ -32,7 +39,7 @@ const Modal = ({ setShowModal }: { setShowModal: (data: boolean) => void }) => {
           <FilterForm control={control} watch={watch} register={register} />
         </ActiveTabContextProvider>
       </div>
-      <FormActionButtons reset={reset} />
+      <FormActionButtons reset={reset} setShowModal={setShowModal} />
     </form>
   );
 };
