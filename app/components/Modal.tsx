@@ -26,8 +26,6 @@ const Modal = ({ setShowModal }: { setShowModal: (data: boolean) => void }) => {
     setShowModal(false);
   };
 
-  console.log(errors);
-
   return (
     <form
       onSubmit={handleSubmit(submitHandler)}

@@ -711,7 +711,7 @@ const ScheduleData = [
   "This month",
   "Last month",
   "This quarter",
-  "2 quarter ago",
+  "2 quarters ago",
   "This year",
   "Last Year",
 ];

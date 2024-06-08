@@ -1,8 +1,16 @@
 import { z } from "zod";
-
+const DateRangeOption = [
+  "All",
+  "This month",
+  "Last month",
+  "This quarter",
+  "2 quarters ago",
+  "This year",
+  "Last Year",
+] as const;
 const filterSchema = z.object({
   schedule: z.object({
-    preset: z.string().optional(),
+    preset: z.enum(DateRangeOption),
     from: z.date().optional(),
     to: z.date().optional(),
   }),

@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import {
   Control,
   Controller,
@@ -15,6 +15,18 @@ import { filterType } from "../zod/schemas";
 import Dropdown from "./custom/Dropdown";
 import { ScheduleData, ServiceType, Status } from "../Data/AppData";
 import useWaitlistStore from "../store";
+import {
+  endOfMonth,
+  endOfQuarter,
+  endOfYear,
+  startOfDay,
+  startOfMonth,
+  startOfQuarter,
+  startOfYear,
+  subMonths,
+  subQuarters,
+  subYears,
+} from "date-fns";
 
 const FilterForm = ({
   register,
@@ -25,7 +37,7 @@ const FilterForm = ({
   control: Control<filterType>;
   watch: UseFormWatch<filterType>;
 }) => {
-  const { peopleData, servicesData } = useWaitlistStore();
+  const { peopleData, servicesData, setFilter, filters } = useWaitlistStore();
   const [activeTab] = useActiveTab();
   const [personName, setPersonName] = useState("");
   const [filteredPeopleList, setFilteredPeopleList] = useState(peopleData);
@@ -52,6 +64,12 @@ const FilterForm = ({
     ]);
   };
 
+  useEffect(() => {
+    setFilter({
+      ...filters,
+      schedule: { ...getDateRange(watch("schedule.preset")) },
+    });
+  }, [watch("schedule.preset")]);
   return (
     <div className="bg-white p-2  sm:rounded-tr-md  sm:flex-1">
       {activeTab === "SCHEDULE" && (
@@ -287,3 +305,59 @@ const FilterForm = ({
 };
 
 export default FilterForm;
+
+type DateRangeOption =
+  | "All"
+  | "This month"
+  | "Last month"
+  | "This quarter"
+  | "2 quarters ago"
+  | "This year"
+  | "Last Year";
+
+function getDateRange(option: DateRangeOption) {
+  const today = new Date();
+
+  switch (option) {
+    case "All":
+      return {
+        preset: option,
+        from: startOfDay("1970-01-01T00:00:00.000Z"),
+        to: startOfDay(new Date()),
+      };
+    case "This month":
+      return {
+        preset: option,
+        from: startOfMonth(today),
+        to: endOfMonth(today),
+      };
+    case "Last month":
+      return {
+        preset: option,
+        from: startOfMonth(subMonths(today, 1)),
+        to: endOfMonth(subMonths(today, 1)),
+      };
+    case "This quarter":
+      return {
+        preset: option,
+        from: startOfQuarter(today),
+        to: endOfQuarter(today),
+      };
+    case "2 quarters ago":
+      return {
+        preset: option,
+        from: startOfQuarter(subQuarters(today, 2)),
+        to: endOfQuarter(subQuarters(today, 2)),
+      };
+    case "This year":
+      return { preset: option, from: startOfYear(today), to: endOfYear(today) };
+    case "Last Year":
+      return {
+        preset: option,
+        from: startOfYear(subYears(today, 1)),
+        to: endOfYear(subYears(today, 1)),
+      };
+    default:
+      throw new Error("Invalid date range option");
+  }
+}

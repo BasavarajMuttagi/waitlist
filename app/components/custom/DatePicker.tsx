@@ -40,7 +40,6 @@ const DateGrid = ({
   let [selectedDay, setSelectedDay] = useState(value);
   let [currentMonth, setCurrentMonth] = useState(format(today, "MMM-yyyy"));
   let firstDayCurrentMonth = parse(currentMonth, "MMM-yyyy", new Date());
-  console.log(firstDayCurrentMonth);
   let days = eachDayOfInterval({
     start: startOfWeek(firstDayCurrentMonth),
     end: endOfWeek(endOfMonth(firstDayCurrentMonth)),
