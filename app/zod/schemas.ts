@@ -1,4 +1,4 @@
-import { boolean, z } from "zod";
+import { z } from "zod";
 
 const filterSchema = z.object({
   schedule: z.object({

@@ -1,7 +1,6 @@
 import {
   ArrowsClockwise,
   DownloadSimple,
-  SquareSplitHorizontal,
 } from "@phosphor-icons/react/dist/ssr";
 import SummaryBox from "../components/SummaryBox";
 import WaitListTable from "../components/WaitListTable";
@@ -22,7 +21,7 @@ const WaitListLayout = () => {
           <SummaryBox text="Leads" count={20} />
         </div>
         <div className="flex flex-col space-y-4 sm:flex-row sm:items-center sm:justify-between">
-          <div className="flex items-center space-x-3">
+          <div className="flex items-center space-x-3 overflow-x-auto text-nowrap">
             <AddFilter /> <PayerNameChips />
           </div>
           <div className="flex justify-between items-center sm:flex sm:items-center sm:space-x-8 sm:mr-2">

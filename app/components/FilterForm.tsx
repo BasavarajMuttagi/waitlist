@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import {
   Control,
   Controller,
@@ -13,7 +13,7 @@ import DatePickerWithLabel from "./DatePickerWithLabel";
 import DatePicker from "./custom/DatePicker";
 import { filterType } from "../zod/schemas";
 import Dropdown from "./custom/Dropdown";
-import { PeopleData, ScheduleData, ServiceType, Status } from "../Data/AppData";
+import { ScheduleData, ServiceType, Status } from "../Data/AppData";
 import useWaitlistStore from "../store";
 
 const FilterForm = ({
@@ -37,7 +37,7 @@ const FilterForm = ({
   const filterPeople = (term: string = "") => {
     setPersonName(term);
     setFilteredPeopleList([
-      ...PeopleData.filter((person) =>
+      ...peopleData.filter((person) =>
         person.payer.toLowerCase().includes(term.toLowerCase())
       ),
     ]);
