@@ -4,7 +4,7 @@ import {
 } from "@phosphor-icons/react/dist/ssr";
 import SummaryBox from "../components/SummaryBox";
 import WaitListTable from "../components/WaitListTable";
-import SearchBar from "../components/SearchBar";
+import SearchBar from "../components/Search";
 import AddFilter from "../components/AddFilter";
 import PayerNameChips from "../components/PayerNameChips";
 import HideColumns from "../components/HideColumns";

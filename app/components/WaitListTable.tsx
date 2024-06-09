@@ -12,7 +12,7 @@ import { motion } from "framer-motion";
 import useWaitlistStore, { Person } from "../store";
 import { useEffect, useState } from "react";
 import { format } from "date-fns";
-import Pagination from "./custom/Pagination";
+import Pagination from "./Pagination";
 
 const WaitListTable = () => {
   const { columnFilters, peopleData, filters, servicesData } =
