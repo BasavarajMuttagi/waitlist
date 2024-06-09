@@ -13,6 +13,7 @@ import useWaitlistStore, { Person } from "../store";
 import { useEffect, useState } from "react";
 import { format } from "date-fns";
 import Pagination from "./Pagination";
+import ItemsPerPage from "./ItemsPerPage";
 
 const WaitListTable = () => {
   const { columnFilters, peopleData, filters, servicesData } =
@@ -24,7 +25,7 @@ const WaitListTable = () => {
   });
 
   const [currentPage, setCurrentPage] = useState(1);
-  const itemsPerPage = 10;
+  const [itemsPerPage, setItemsPerPage] = useState<string>("5");
   const totalItems = filteredPeopleList.length;
 
   function getItemsForPage<T>(
@@ -91,12 +92,14 @@ const WaitListTable = () => {
   const itemsOnPage = getItemsForPage(
     filteredPeopleList,
     currentPage,
-    itemsPerPage
+    parseInt(itemsPerPage)
   );
 
+  console.log(itemsPerPage);
   useEffect(() => {
+    console.log(itemsPerPage);
     filterTableData();
-  }, [filters]);
+  }, [filters, itemsPerPage]);
 
   return (
     <div>
@@ -275,12 +278,28 @@ const WaitListTable = () => {
           </tbody>
         </table>
       </div>
-      <Pagination
-        totalItems={totalItems}
-        itemsPerPage={itemsPerPage}
-        currentPage={currentPage}
-        onPageChange={setCurrentPage}
-      />
+      <div className="flex flex-col items-center sm:flex-row sm:items-baseline sm:justify-between py-2">
+        <div className="text-slate-500 flex items-center space-x-2">
+          <span>Displaying</span>
+          <ItemsPerPage
+            options={["5", "10", "15", "20"]}
+            value={itemsPerPage}
+            onChange={setItemsPerPage}
+          />
+          <div className="flex items-center space-x-2">
+            <span>out of</span>
+            <span className="text-slate-950 font-medium">
+              {filteredPeopleList.length}
+            </span>
+          </div>
+        </div>
+        <Pagination
+          totalItems={totalItems}
+          itemsPerPage={parseInt(itemsPerPage)}
+          currentPage={currentPage}
+          onPageChange={setCurrentPage}
+        />
+      </div>
     </div>
   );
 };

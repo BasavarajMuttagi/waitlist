@@ -33,14 +33,14 @@ const Pagination: React.FC<PaginationProps> = ({
   };
 
   return (
-    <nav className="flex justify-center mt-4">
+    <nav className="flex justify-center mt-4 text-xs">
       <ul className="inline-flex items-center space-x-2">
         {showPrevNext && (
           <li>
             <button
               onClick={() => handlePageClick(currentPage - 1)}
               disabled={currentPage === 1}
-              className="flex items-center space-x-4 hover:text-gray-700 disabled:text-gray-200 disabled:cursor-not-allowed"
+              className="flex items-center space-x-1 hover:text-gray-700 disabled:text-gray-200 disabled:cursor-not-allowed"
             >
               <CaretLeft size={20} /> <span>Prev</span>
             </button>
@@ -65,7 +65,7 @@ const Pagination: React.FC<PaginationProps> = ({
             <button
               onClick={() => handlePageClick(currentPage + 1)}
               disabled={currentPage === totalPages}
-              className="flex items-center space-x-4 hover:text-gray-700 disabled:text-gray-200 disabled:cursor-not-allowed"
+              className="flex items-center space-x-1 hover:text-gray-700 disabled:text-gray-200 disabled:cursor-not-allowed"
             >
               <span>Next</span> <CaretRight size={20} />
             </button>
