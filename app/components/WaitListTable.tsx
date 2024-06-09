@@ -95,9 +95,7 @@ const WaitListTable = () => {
     parseInt(itemsPerPage)
   );
 
-  console.log(itemsPerPage);
   useEffect(() => {
-    console.log(itemsPerPage);
     filterTableData();
   }, [filters, itemsPerPage]);
 
