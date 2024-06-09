@@ -1,5 +1,4 @@
 import { CalendarBlank, Users, SquaresFour } from "@phosphor-icons/react";
-import React, { useState } from "react";
 import { twMerge } from "tailwind-merge";
 import { useActiveTab } from "../contexts/ActiveTabContextProvider";
 

@@ -5,7 +5,6 @@ import {
   HourglassHigh,
   Tray,
 } from "@phosphor-icons/react/dist/ssr";
-import { useContext } from "react";
 import { motion } from "framer-motion";
 import { twMerge } from "tailwind-merge";
 import { useCollapse } from "../contexts/CollapseContextProvider";
