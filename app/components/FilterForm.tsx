@@ -11,7 +11,6 @@ import { useActiveTab } from "../contexts/ActiveTabContextProvider";
 import SearchBar from "./custom/SearchBar";
 import { twMerge } from "tailwind-merge";
 import { filterType } from "../zod/schemas";
-import Dropdown from "./custom/Dropdown";
 import { ScheduleData, ServiceType, Status } from "../Data/AppData";
 import useWaitlistStore from "../store";
 import {
@@ -28,6 +27,7 @@ import {
   subYears,
 } from "date-fns";
 import { CalendarBlank } from "@phosphor-icons/react/dist/ssr";
+import Dropdown from "./custom/Dropdown";
 
 const FilterForm = ({
   register,
