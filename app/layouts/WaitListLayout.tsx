@@ -15,7 +15,7 @@ import { useCollapse } from "../contexts/CollapseContextProvider";
 const WaitListLayout = () => {
   const [_, setIsCollapsed] = useCollapse();
   return (
-    <div className="px-1 py-2 w-full rounded-md space-y-10 bg-white drop-shadow-md">
+    <div className="px-1 py-2 w-full rounded-md space-y-10 bg-white drop-shadow-md sm:mt-3 sm:h-[95%] sm:p-3">
       <div className="flex justify-between items-center">
         <h1 className="text-2xl font-semibold text-slate-700">Waitlist</h1>
         <List
