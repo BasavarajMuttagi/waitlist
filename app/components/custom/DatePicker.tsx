@@ -25,7 +25,7 @@ const DateGrid = ({
 }: {
   name: string;
   onChange: (data: Date) => void;
-  value: Date | undefined;
+  value: string | undefined;
 }) => {
   let colStartClasses = [
     "",
@@ -37,7 +37,7 @@ const DateGrid = ({
     "col-start-7",
   ];
   let today = startOfToday();
-  let [selectedDay, setSelectedDay] = useState(value);
+  let [selectedDay, setSelectedDay] = useState<Date>(new Date(value!));
   let [currentMonth, setCurrentMonth] = useState(format(today, "MMM-yyyy"));
   let firstDayCurrentMonth = parse(currentMonth, "MMM-yyyy", new Date());
   let days = eachDayOfInterval({

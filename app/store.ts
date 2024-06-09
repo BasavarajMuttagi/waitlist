@@ -2,7 +2,7 @@ import { create } from "zustand";
 import { createJSONStorage, persist, PersistOptions } from "zustand/middleware";
 import { columnFilterType, filterType } from "./zod/schemas";
 import { PeopleData, ServicesData } from "./Data/AppData";
-import { startOfDay } from "date-fns";
+import { format, startOfDay } from "date-fns";
 type Service = {
   id: string;
   name: string;
@@ -43,15 +43,18 @@ const storageModule: PersistOptions<waitListStoreType> = {
 const initialState: filterType = {
   schedule: {
     preset: "All",
-    from: startOfDay("1970-01-01T00:00:00.000Z"),
-    to: startOfDay(new Date()),
+    from: format(
+      startOfDay("1970-01-01T00:00:00.000Z").toString(),
+      "yyyy-MM-dd"
+    ),
+    to: format(startOfDay(new Date()).toString(), "yyyy-MM-dd"),
   },
   people: [],
   product: {
     searchType: "NAME",
     serviceName: [],
-    serviceStatusTag: "",
-    serviceTypeTag: "",
+    serviceStatusTag: "Show all service type",
+    serviceTypeTag: "Show all",
   },
 };
 

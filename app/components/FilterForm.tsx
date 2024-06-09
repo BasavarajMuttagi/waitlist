@@ -3,14 +3,13 @@ import {
   Control,
   Controller,
   UseFormRegister,
+  UseFormSetValue,
   UseFormWatch,
 } from "react-hook-form";
 
 import { useActiveTab } from "../contexts/ActiveTabContextProvider";
 import SearchBar from "./custom/SearchBar";
 import { twMerge } from "tailwind-merge";
-import DatePickerWithLabel from "./DatePickerWithLabel";
-import DatePicker from "./custom/DatePicker";
 import { filterType } from "../zod/schemas";
 import Dropdown from "./custom/Dropdown";
 import { ScheduleData, ServiceType, Status } from "../Data/AppData";
@@ -19,6 +18,7 @@ import {
   endOfMonth,
   endOfQuarter,
   endOfYear,
+  format,
   startOfDay,
   startOfMonth,
   startOfQuarter,
@@ -27,15 +27,18 @@ import {
   subQuarters,
   subYears,
 } from "date-fns";
+import { CalendarBlank } from "@phosphor-icons/react/dist/ssr";
 
 const FilterForm = ({
   register,
   control,
   watch,
+  setValue,
 }: {
   register: UseFormRegister<filterType>;
   control: Control<filterType>;
   watch: UseFormWatch<filterType>;
+  setValue: UseFormSetValue<filterType>;
 }) => {
   const { peopleData, servicesData, setFilter, filters } = useWaitlistStore();
   const [activeTab] = useActiveTab();
@@ -45,6 +48,12 @@ const FilterForm = ({
   const [filteredServiceList, setFilteredServiceList] = useState<
     { name: string; type: string; status: string }[]
   >([]);
+
+  const [dateRange, setDateRange] = useState<{
+    preset: string;
+    from: string;
+    to: string;
+  }>();
 
   const filterPeople = (term: string = "") => {
     setPersonName(term);
@@ -65,11 +74,13 @@ const FilterForm = ({
   };
 
   useEffect(() => {
-    setFilter({
-      ...filters,
-      schedule: { ...getDateRange(watch("schedule.preset")) },
-    });
+    const data = getDateRange(watch("schedule.preset"));
+    setDateRange(data);
+    setValue("schedule.from", data.from);
+    setValue("schedule.to", data.to);
   }, [watch("schedule.preset")]);
+
+  useEffect(() => {}, [watch("schedule.preset")]);
   return (
     <div className="bg-white p-2  sm:rounded-tr-md  sm:flex-1">
       {activeTab === "SCHEDULE" && (
@@ -92,44 +103,42 @@ const FilterForm = ({
           </div>
           <div className="space-y-4  sm:flex sm:items-center sm:justify-between sm:space-x-2 sm:space-y-0">
             <div className="space-y-1 flex-1">
-              <DatePickerWithLabel
-                label="From"
-                value={watch("schedule.from") as Date}
-              >
-                <Controller
-                  name="schedule.from"
-                  control={control}
-                  render={({ field: { name, value, onChange } }) => {
-                    return (
-                      <DatePicker
-                        name={name}
-                        value={value}
-                        onChange={onChange}
-                      />
-                    );
-                  }}
-                />
-              </DatePickerWithLabel>
+              <div>
+                <div className="rounded-md border-2 border-zinc-200 flex items-center px-3 py-1.5 space-x-3 cursor-pointer shadow-sm">
+                  <CalendarBlank size={20} />
+                  <div className="text-sm font-medium">
+                    {dateRange?.from
+                      ? format(dateRange?.from, "dd MMM yyyy")
+                      : "Pick a date"}
+                  </div>
+                  <input
+                    type="date"
+                    {...register("schedule.from")}
+                    value={dateRange?.from}
+                    className="hidden"
+                  />
+                </div>
+                <div className="absolute z-30 top-[50%] left-[45%]"></div>
+              </div>
             </div>
             <div className="space-y-1 flex-1">
-              <DatePickerWithLabel
-                label="To"
-                value={watch("schedule.to") as Date}
-              >
-                <Controller
-                  name="schedule.to"
-                  control={control}
-                  render={({ field: { name, value, onChange } }) => {
-                    return (
-                      <DatePicker
-                        name={name}
-                        value={value}
-                        onChange={onChange}
-                      />
-                    );
-                  }}
-                />
-              </DatePickerWithLabel>
+              <div>
+                <div className="rounded-md border-2 border-zinc-200 flex items-center px-3 py-1.5 space-x-3 cursor-pointer shadow-sm">
+                  <CalendarBlank size={20} />
+                  <div className="text-sm font-medium">
+                    {dateRange?.from
+                      ? format(dateRange?.to, "dd MMM yyyy")
+                      : "Pick a date"}
+                  </div>
+                  <input
+                    type="date"
+                    {...register("schedule.to")}
+                    value={dateRange?.to}
+                    className="hidden"
+                  />
+                </div>
+                <div className="absolute z-30 top-[50%] left-[45%]"></div>
+              </div>
             </div>
           </div>
         </div>
@@ -322,40 +331,56 @@ function getDateRange(option: DateRangeOption) {
     case "All":
       return {
         preset: option,
-        from: startOfDay("1970-01-01T00:00:00.000Z"),
-        to: startOfDay(new Date()),
+        from: format(
+          startOfDay("1970-01-01T00:00:00.000Z").toString(),
+          "yyyy-MM-dd"
+        ),
+        to: format(startOfDay(new Date()).toString(), "yyyy-MM-dd"),
       };
     case "This month":
       return {
         preset: option,
-        from: startOfMonth(today),
-        to: endOfMonth(today),
+        from: format(startOfMonth(today).toString(), "yyyy-MM-dd"),
+        to: format(endOfMonth(today).toString(), "yyyy-MM-dd"),
       };
     case "Last month":
       return {
         preset: option,
-        from: startOfMonth(subMonths(today, 1)),
-        to: endOfMonth(subMonths(today, 1)),
+        from: format(
+          startOfMonth(subMonths(today, 1)).toString(),
+          "yyyy-MM-dd"
+        ),
+        to: format(endOfMonth(subMonths(today, 1)).toString(), "yyyy-MM-dd"),
       };
     case "This quarter":
       return {
         preset: option,
-        from: startOfQuarter(today),
-        to: endOfQuarter(today),
+        from: format(startOfQuarter(today).toString(), "yyyy-MM-dd"),
+        to: format(endOfQuarter(today).toString(), "yyyy-MM-dd"),
       };
     case "2 quarters ago":
       return {
         preset: option,
-        from: startOfQuarter(subQuarters(today, 2)),
-        to: endOfQuarter(subQuarters(today, 2)),
+        from: format(
+          startOfQuarter(subQuarters(today, 2)).toString(),
+          "yyyy-MM-dd"
+        ),
+        to: format(
+          endOfQuarter(subQuarters(today, 2)).toString(),
+          "yyyy-MM-dd"
+        ),
       };
     case "This year":
-      return { preset: option, from: startOfYear(today), to: endOfYear(today) };
+      return {
+        preset: option,
+        from: format(startOfYear(today).toString(), "yyyy-MM-dd"),
+        to: format(endOfYear(today).toString(), "yyyy-MM-dd"),
+      };
     case "Last Year":
       return {
         preset: option,
-        from: startOfYear(subYears(today, 1)),
-        to: endOfYear(subYears(today, 1)),
+        from: format(startOfYear(subYears(today, 1)).toString(), "yyyy-MM-dd"),
+        to: format(endOfYear(subYears(today, 1)).toString(), "yyyy-MM-dd"),
       };
     default:
       throw new Error("Invalid date range option");

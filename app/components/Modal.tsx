@@ -15,6 +15,8 @@ const Modal = ({ setShowModal }: { setShowModal: (data: boolean) => void }) => {
     reset,
     register,
     watch,
+    getValues,
+    setValue,
     formState: { errors },
   } = useForm<filterType>({
     resolver: zodResolver(filterSchema),
@@ -34,7 +36,12 @@ const Modal = ({ setShowModal }: { setShowModal: (data: boolean) => void }) => {
       <div className="flex flex-col sm:flex-row sm:h-full">
         <ActiveTabContextProvider>
           <ModalTabs />
-          <FilterForm control={control} watch={watch} register={register} />
+          <FilterForm
+            control={control}
+            watch={watch}
+            register={register}
+            setValue={setValue}
+          />
         </ActiveTabContextProvider>
       </div>
       <FormActionButtons reset={reset} setShowModal={setShowModal} />

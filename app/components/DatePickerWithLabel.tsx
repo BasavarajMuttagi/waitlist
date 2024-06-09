@@ -7,9 +7,9 @@ const DatePickerWithLabel = ({
   children,
   value,
 }: {
-  label: string;
+  label: string | undefined;
   children: ReactNode;
-  value: Date;
+  value: string | undefined;
 }) => {
   const [showPicker, setShowPicker] = useState(false);
   return (

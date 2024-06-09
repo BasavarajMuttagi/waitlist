@@ -11,8 +11,8 @@ const DateRangeOption = [
 const filterSchema = z.object({
   schedule: z.object({
     preset: z.enum(DateRangeOption),
-    from: z.date().optional(),
-    to: z.date().optional(),
+    from: z.string().optional(),
+    to: z.string().optional(),
   }),
   people: z.string().array().optional(),
   product: z.object({
