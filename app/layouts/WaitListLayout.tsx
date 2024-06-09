@@ -1,6 +1,8 @@
+"use client";
 import {
   ArrowsClockwise,
   DownloadSimple,
+  List,
 } from "@phosphor-icons/react/dist/ssr";
 import SummaryBox from "../components/SummaryBox";
 import WaitListTable from "../components/WaitListTable";
@@ -8,11 +10,18 @@ import SearchBar from "../components/Search";
 import AddFilter from "../components/AddFilter";
 import PayerNameChips from "../components/PayerNameChips";
 import HideColumns from "../components/HideColumns";
+import { useCollapse } from "../contexts/CollapseContextProvider";
 
 const WaitListLayout = () => {
+  const [_, setIsCollapsed] = useCollapse();
   return (
     <div className="px-1 py-2 w-full rounded-md space-y-10 bg-white drop-shadow-md">
-      <h1 className="text-2xl font-semibold text-slate-700">Waitlist</h1>
+      <div className="flex justify-between items-center">
+        <h1 className="text-2xl font-semibold text-slate-700 sm:hidden">
+          Waitlist
+        </h1>
+        <List size={40} onClick={() => setIsCollapsed((prev) => !prev)} />
+      </div>
       <div className="space-y-6">
         <div
           className="flex items-center space-x-4 overflow-x-auto sm:justify-between sm:space-x-10"

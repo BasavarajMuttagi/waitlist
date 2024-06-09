@@ -10,7 +10,7 @@ const BrandLogo = () => {
     <Image
       src={logo.src}
       alt="logo"
-      className="cursor-pointer"
+      className="cursor-pointer h-12 w-12"
       height={20}
       width={20}
       onClick={() => setIsCollapsed((prev) => !prev)}
