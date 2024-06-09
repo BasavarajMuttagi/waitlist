@@ -17,10 +17,10 @@ const WaitListLayout = () => {
   return (
     <div className="px-1 py-2 w-full rounded-md space-y-10 bg-white drop-shadow-md">
       <div className="flex justify-between items-center">
-        <h1 className="text-2xl font-semibold text-slate-700 sm:hidden">
+        <h1 className="text-2xl font-semibold text-slate-700">
           Waitlist
         </h1>
-        <List size={40} onClick={() => setIsCollapsed((prev) => !prev)} />
+        <List size={40} onClick={() => setIsCollapsed((prev) => !prev)} className="sm:hidden" />
       </div>
       <div className="space-y-6">
         <div
